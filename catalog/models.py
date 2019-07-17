@@ -84,8 +84,10 @@ class BookInstance(models.Model):
     )
 
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    
     class Meta:
         ordering = ['due_back']
+        permissions = (('can_mark_returned', 'Set book as returned'),)
 
     def __str__(self):
         """String for representing the Model object"""
