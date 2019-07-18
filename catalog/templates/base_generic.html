@@ -31,8 +31,10 @@
               <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
               <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
               <hr>
-              <li>Staff Area</li>
-              <li><a href="{% url 'all-borrowed' %}">All Borrowed</a></li>
+              <li>Staff Area</li-create>
+              <li><a href="{% url 'book_create' %}">Create Book Entry</a></li>
+              <li><a href="{% url 'author_create' %}">Create an Author</a></li>
+              <li><a href="{% url 'all-borrowed' %}">All Borrowed Books</a></li>
 
             {% elif user.is_authenticated %}
               <li>User: {{ user.get_username }}</li>

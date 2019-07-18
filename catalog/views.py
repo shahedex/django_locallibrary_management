@@ -129,7 +129,7 @@ def renew_book_librarian(request, pk):
 
     return render(request, 'book_renew_librarian.html', context)
 
-# Generic editing views
+# Generic editing views for Authors
 class AuthorCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'catalog.can_mark_returned'
     model = Author
@@ -148,3 +148,22 @@ class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model = Author
     template_name = 'author_confirm_delete.html'
     success_url = reverse_lazy('authors')
+
+# Generic editing views for Books
+class BookCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.can_mark_returned'
+    model = Book
+    template_name = 'book_form.html'
+    fields = '__all__'
+
+class BookUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'catalog.can_mark_returned'
+    model = Book
+    fields = '__all__'
+    template_name = 'book_form.html'
+
+class BookDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'catalog.can_mark_returned'
+    model = Book
+    template_name = 'book_confirm_delete.html'
+    success_url = reverse_lazy('books')
