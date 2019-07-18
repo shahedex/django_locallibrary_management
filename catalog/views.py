@@ -11,6 +11,11 @@ from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
 from catalog.forms import RenewBookForm
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from catalog.models import Author
+
+
 def index(request):
     """View function for homepage of the library site"""
 
@@ -123,3 +128,23 @@ def renew_book_librarian(request, pk):
     }
 
     return render(request, 'book_renew_librarian.html', context)
+
+# Generic editing views
+class AuthorCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.can_mark_returned'
+    model = Author
+    template_name = 'author_form.html'
+    fields = '__all__'
+    initial = {'date_of_death': '05/01/2018'}
+
+class AuthorUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'catalog.can_mark_returned'
+    model = Author
+    template_name = 'author_form.html'
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+
+class AuthorDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'catalog.can_mark_returned'
+    model = Author
+    template_name = 'author_confirm_delete.html'
+    success_url = reverse_lazy('authors')
