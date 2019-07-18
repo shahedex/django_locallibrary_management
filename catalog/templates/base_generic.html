@@ -33,6 +33,7 @@
               <hr>
               <li>Staff Area</li>
               <li><a href="{% url 'all-borrowed' %}">All Borrowed</a></li>
+
             {% elif user.is_authenticated %}
               <li>User: {{ user.get_username }}</li>
               <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
